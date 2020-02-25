@@ -1,4 +1,4 @@
-# LongPoll recorder
+# VK LongPoll recorder
 ## To run
 `$ python recorder.py --token=<YOUR_TOKEN>`
 
@@ -7,6 +7,7 @@ or
 `$ VK_TOKEN=<YOUR_TOKEN>; python recorder.py`
 
 ## Advanced examples
+
 To set API version
 
 `$ python recorder.py --api_version='5.80'`
@@ -18,6 +19,10 @@ To set LongPoll version(currently supported only 10)
 To set LongPoll mode 
 
 `$ python recorder.py --mode=74 # 2 + 8 + 64`
+
+To set output file
+
+`$ python recorder.py --output=myfile`
 
 To set wait time
 
