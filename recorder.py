@@ -59,8 +59,11 @@ class LongPoll:
         response = requests.get(self._build_url()).json()
 
         code = response.get("failed", 0)
-        if code == 0 or code == 1:
+        if code == 0:
             self._ts = response["ts"]
+        elif code == 1:
+            self._ts = response["ts"]
+            return None
         elif code == 2:
             self._update_server(False)
         elif code == 3:
@@ -76,7 +79,8 @@ class LongPoll:
         self._update_server(self._ts == 0)
         while True:
             response = self._poll()
-            yield response["updates"], response["ts"]
+            if response:
+                yield response["updates"], response["ts"]
 
     def run(self):
         for events, ts in self._loop():
@@ -102,7 +106,7 @@ def main(
     lp = LongPoll(token, api_version, version, mode, wait, ts)
 
     if output:
-        mode = "w" if os.path.exists(output) else "a"
+        mode = "a" if os.path.exists(output) else "w"
         with open(output, mode=mode) as f:
             for event, ts in lp.run():
                 print(event, ts)
