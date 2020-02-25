@@ -32,6 +32,6 @@ To set initial ts
 
 `$ python recorder.py --ts=<YOUR_TS>`
 
-## Requirments
+## Requirements
 - [requests](https://github.com/psf/requests)
 - [google.Fire](https://github.com/google/python-fire)
