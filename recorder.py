@@ -102,11 +102,13 @@ def main(
     lp = LongPoll(token, api_version, version, mode, wait, ts)
 
     if output:
-        with open(output, mode="a") as f:
+        mode = "w" if os.path.exists(output) else "a"
+        with open(output, mode=mode) as f:
             for event, ts in lp.run():
                 print(event, ts)
                 f.write(f"{event} {ts}\n")
                 f.flush()
+
     else:
         for event, ts in lp.run():
             print(event, ts)
