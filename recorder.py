@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 
@@ -107,8 +108,9 @@ def main(
 
     if output:
         mode = "a" if os.path.exists(output) else "w"
-        with open(output, mode=mode) as f:
+        with open(output, mode=mode, encoding="utf-8") as f:
             for event, ts in lp.run():
+                event = json.dumps(event)
                 print(event, ts)
                 f.write(f"{event} {ts}\n")
                 f.flush()
