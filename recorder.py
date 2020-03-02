@@ -81,7 +81,7 @@ class LongPoll:
         while True:
             response = self._poll()
             if response:
-                yield response["updates"], response["ts"]
+                yield response.get("updates", []), response["ts"]
 
     def run(self):
         for events, ts in self._loop():
@@ -110,11 +110,10 @@ def main(
         mode = "a" if os.path.exists(output) else "w"
         with open(output, mode=mode, encoding="utf-8") as f:
             for event, ts in lp.run():
-                event = json.dumps(event)
+                event = json.dumps(event, ensure_ascii=False)
                 print(event, ts)
-                f.write(f"{event} {ts}\n")
+                f.write(f"{event}\n")
                 f.flush()
-
     else:
         for event, ts in lp.run():
             print(event, ts)
