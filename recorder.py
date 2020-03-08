@@ -91,7 +91,7 @@ class LongPoll:
 
 def main(
         token: str = "",
-        output: str = "output.txt",
+        output: str = "output.json",
         api_version: str = "5.103",
         version: int = 10,
         mode: int = 2 + 8 + 64,
