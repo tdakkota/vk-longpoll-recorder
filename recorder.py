@@ -20,7 +20,7 @@ class LongPoll:
             token: str,
             api_version: str = "5.103",
             version: int = 10,
-            mode: int = 2 + 8 + 64,
+            mode: int = 128,
             wait: int = 25,
             ts: int = 0
     ):
